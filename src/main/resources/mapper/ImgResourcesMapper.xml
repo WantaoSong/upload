@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upload.v3.mapper.ImgResourcesMapper">
+  <resultMap id="BaseResultMap" type="com.upload.v3.entity.ImgResources">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="_type" jdbcType="VARCHAR" property="type" />
+    <result column="_gid" jdbcType="VARCHAR" property="gid" />
+    <result column="_img" jdbcType="VARCHAR" property="img" />
+    <result column="_status" jdbcType="VARCHAR" property="status" />
+    <result column="_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="_child_type" jdbcType="VARCHAR" property="childType" />
+    <result column="_acc_id" jdbcType="VARCHAR" property="accId" />
+    <result column="_acc_name" jdbcType="VARCHAR" property="accName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, _type, _gid, _img, _status, _create_time, _child_type, _acc_id, _acc_name
+  </sql>
+  <select id="selectByExample" parameterType="com.upload.v3.entity.ImgResourcesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from img_resources
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      limit #{limit.start},#{limit.size}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from img_resources
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from img_resources
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.upload.v3.entity.ImgResourcesExample">
+    delete from img_resources
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyProperty="f_id" parameterType="com.upload.v3.entity.ImgResources" useGeneratedKeys="true">
+    insert into img_resources (id, _type, _gid, 
+      _img, _status, _create_time, 
+      _child_type, _acc_id, _acc_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{gid,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{childType,jdbcType=VARCHAR}, #{accId,jdbcType=VARCHAR}, #{accName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyProperty="f_id" parameterType="com.upload.v3.entity.ImgResources" useGeneratedKeys="true">
+    insert into img_resources
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        _type,
+      </if>
+      <if test="gid != null">
+        _gid,
+      </if>
+      <if test="img != null">
+        _img,
+      </if>
+      <if test="status != null">
+        _status,
+      </if>
+      <if test="createTime != null">
+        _create_time,
+      </if>
+      <if test="childType != null">
+        _child_type,
+      </if>
+      <if test="accId != null">
+        _acc_id,
+      </if>
+      <if test="accName != null">
+        _acc_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="gid != null">
+        #{gid,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="childType != null">
+        #{childType,jdbcType=VARCHAR},
+      </if>
+      <if test="accId != null">
+        #{accId,jdbcType=VARCHAR},
+      </if>
+      <if test="accName != null">
+        #{accName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.upload.v3.entity.ImgResourcesExample" resultType="java.lang.Long">
+    select count(*) from img_resources
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update img_resources
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        _type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gid != null">
+        _gid = #{record.gid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null">
+        _img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        _status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        _create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.childType != null">
+        _child_type = #{record.childType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accId != null">
+        _acc_id = #{record.accId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accName != null">
+        _acc_name = #{record.accName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update img_resources
+    set id = #{record.id,jdbcType=INTEGER},
+      _type = #{record.type,jdbcType=VARCHAR},
+      _gid = #{record.gid,jdbcType=VARCHAR},
+      _img = #{record.img,jdbcType=VARCHAR},
+      _status = #{record.status,jdbcType=VARCHAR},
+      _create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      _child_type = #{record.childType,jdbcType=VARCHAR},
+      _acc_id = #{record.accId,jdbcType=VARCHAR},
+      _acc_name = #{record.accName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.upload.v3.entity.ImgResources">
+    update img_resources
+    <set>
+      <if test="type != null">
+        _type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="gid != null">
+        _gid = #{gid,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        _img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        _status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        _create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="childType != null">
+        _child_type = #{childType,jdbcType=VARCHAR},
+      </if>
+      <if test="accId != null">
+        _acc_id = #{accId,jdbcType=VARCHAR},
+      </if>
+      <if test="accName != null">
+        _acc_name = #{accName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.upload.v3.entity.ImgResources">
+    update img_resources
+    set _type = #{type,jdbcType=VARCHAR},
+      _gid = #{gid,jdbcType=VARCHAR},
+      _img = #{img,jdbcType=VARCHAR},
+      _status = #{status,jdbcType=VARCHAR},
+      _create_time = #{createTime,jdbcType=TIMESTAMP},
+      _child_type = #{childType,jdbcType=VARCHAR},
+      _acc_id = #{accId,jdbcType=VARCHAR},
+      _acc_name = #{accName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
